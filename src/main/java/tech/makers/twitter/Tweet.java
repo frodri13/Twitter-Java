@@ -19,8 +19,6 @@ public class Tweet {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String body;
-    @Autowired
-    private TweetTime tweetTimeime;
 
     protected Tweet() {}
 
@@ -39,9 +37,5 @@ public class Tweet {
 
     public String getBody() {
         return body;
-    }
-
-    public TweetTime getTime() {
-     return tweetTimeime;
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-@Component
 public class TweetTime {
     private LocalTime time;
     private String formattedTime;

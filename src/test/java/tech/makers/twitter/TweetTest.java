@@ -20,9 +20,9 @@ public class TweetTest {
         assertEquals("Tweet[id=null, body='Hello, world!']", subject.toString());
     }
 
-    @Test
-    void shouldShowTheTime() {
-        Tweet subject = new Tweet("And the time is: ");
-        assertEquals(LocalDate.now(), subject.getTime());
-    }
+//    @Test
+//    void shouldShowTheTime() {
+//        Tweet subject = new Tweet("And the time is: ");
+//        assertEquals(LocalDate.now(), subject.getTime());
+//    }
 }
