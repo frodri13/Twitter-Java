@@ -1,10 +1,12 @@
-package tech.makers.twitter;
+package tech.makers.twitter.time;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+@Component
 public class TweetTime {
     private LocalTime time;
     private String formattedTime;

@@ -1,4 +1,4 @@
-package tech.makers.twitter;
+package tech.makers.twitter.tweet;
 
 import org.springframework.data.repository.CrudRepository;
 

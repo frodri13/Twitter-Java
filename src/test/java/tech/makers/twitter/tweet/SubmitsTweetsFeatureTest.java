@@ -1,4 +1,4 @@
-package tech.makers.twitter;
+package tech.makers.twitter.tweet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

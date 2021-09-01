@@ -1,8 +1,11 @@
-package tech.makers.twitter;
+package tech.makers.twitter.tweet;
 
 import org.junit.jupiter.api.Test;
+import tech.makers.twitter.time.TweetTime;
+import tech.makers.twitter.tweet.Tweet;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,9 +23,9 @@ public class TweetTest {
         assertEquals("Tweet[id=null, body='Hello, world!']", subject.toString());
     }
 
-//    @Test
-//    void shouldShowTheTime() {
-//        Tweet subject = new Tweet("And the time is: ");
-//        assertEquals(LocalDate.now(), subject.getTime());
-//    }
+    @Test
+    void shouldShowTheTime() {
+        Tweet subject = new Tweet("And the time is: ", new TweetTime());
+        assertEquals(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), subject.getTime());
+    }
 }

@@ -1,8 +1,8 @@
-package tech.makers.twitter;
+package tech.makers.twitter.time;
 
 import org.junit.jupiter.api.Test;
+import tech.makers.twitter.time.TweetTime;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
