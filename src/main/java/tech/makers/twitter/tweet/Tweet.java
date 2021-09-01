@@ -2,12 +2,10 @@ package tech.makers.twitter.tweet;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import tech.makers.twitter.time.TweetTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 // This is a Spring Entity.
@@ -15,7 +13,6 @@ import javax.persistence.Id;
 // And each instance, when saved, will refer to a row in the 'tweet' table in the database.
 @Entity
 public class Tweet {
-    private TweetTime tweetTime;
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -25,19 +22,15 @@ public class Tweet {
 
     protected Tweet() {}
 
+    @Autowired
     public Tweet(String body) {
         this.body = body;
-    }
-
-    @Autowired
-    public Tweet(String body, TweetTime tweetTime) {
-        this.body = body;
-        time = tweetTime.getTime();
+        time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) ;
     }
 
     @Override
     public String toString() {
-        return String.format("Tweet[id=%d, body='%s']", id, body);
+        return String.format("Tweet[id=%d, body='%s', time='%s']", id, body, time);
     }
 
     public Long getId() {
@@ -48,5 +41,7 @@ public class Tweet {
         return body;
     }
 
-    public String getTime() {return time;}
+    public String getTime() {
+        return time;
+    }
 }

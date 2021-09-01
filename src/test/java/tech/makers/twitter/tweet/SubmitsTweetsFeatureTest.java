@@ -9,6 +9,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.htmlunit.webdriver.MockMvcHtmlUnitDriverBuilder;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
@@ -24,7 +27,6 @@ public class SubmitsTweetsFeatureTest {
                 .webAppContextSetup(context)
                 .build();
     }
-
     @Test
     public void tweetIndexShouldSubmitAndDisplayTweets() throws Exception {
         // localhost:9990 is the default address of the server in test mode
@@ -32,5 +34,14 @@ public class SubmitsTweetsFeatureTest {
         driver.findElement(By.id("tweet-form-body")).sendKeys("This is a tweet!");
         driver.findElement(By.id("tweet-form-submit")).click();
         assertThat(driver.findElement(By.tagName("body")).getText()).contains("This is a tweet!");
+    }
+
+    @Test
+    public void tweetIndexShouldSubmitAndDisplayTweetsWithTime() throws Exception {
+        // localhost:9990 is the default address of the server in test mode
+        driver.get("http://localhost:9990/");
+        driver.findElement(By.id("tweet-form-body")).sendKeys("This is a tweet!");
+        driver.findElement(By.id("tweet-form-submit")).click();
+        assertThat(driver.findElement(By.tagName("body")).getText()).contains("This is a tweet! " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }
 }

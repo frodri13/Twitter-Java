@@ -13,8 +13,10 @@
                                                                     based on our newTweet set up in the controller. -->
         <!--         ^^^^^^^^^^^^^^^^^^^^^^ This tells Thymeleaf to submit the form to /tweets -->
         <input type="text" id="tweet-form-body" th:field="*{body}">
+
+
         <!--                                    ^^^^^^^^^^^^^^^^^^ This references the `body` field of `newTweet`  -->
-        <input type="submit" id="tweet-form-submit" value="Post">
+        <input type="submit" id="tweet-form-submit" value="Post" >
         <!--                 ^^^^^^^^^^^^^^^^^^^^^^ These IDs are here so the tests know what to look for -->
     </form>
 
@@ -22,6 +24,7 @@
         <!--vvvvvvv  vvvvvvvvvvvvvvvv This syntax loops over each item in `tweets`, calling it `tweet` -->
         <li th:each="tweet: ${tweets}">
             <span th:text="${tweet.body}"></span>
+            <span th:text="${tweet.time}"></span>
             <!--  ^^^^^^^  ^^^^^^^^^^^^^ And this pulls the body of the tweet out, and puts it into element -->
         </li>
     </ul>
