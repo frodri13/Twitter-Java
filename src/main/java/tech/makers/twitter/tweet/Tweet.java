@@ -1,12 +1,8 @@
 package tech.makers.twitter.tweet;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
+import java.time.Clock;
+import java.time.LocalDateTime;
 
 // This is a Spring Entity.
 // It represents a Model in MVC.
@@ -18,19 +14,22 @@ public class Tweet {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String body;
-    private String time;
+    private LocalDateTime createdAt;
 
     protected Tweet() {}
 
-    @Autowired
     public Tweet(String body) {
         this.body = body;
-        time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) ;
+        this.createdAt = LocalDateTime.now(Clock.systemUTC());
+    }
+    public Tweet(String body, Clock clock){
+        this.body = body;
+        this.createdAt = LocalDateTime.now(clock);
     }
 
     @Override
     public String toString() {
-        return String.format("Tweet[id=%d, body='%s', time='%s']", id, body, time);
+        return String.format("Tweet[id=%d, body='%s', createdAt='%s']", id, body, createdAt);
     }
 
     public Long getId() {
@@ -41,7 +40,6 @@ public class Tweet {
         return body;
     }
 
-    public String getTime() {
-        return time;
+    public LocalDateTime getCreatedAt() { return LocalDateTime.now();
     }
 }

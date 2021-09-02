@@ -1,7 +1,12 @@
 package tech.makers.twitter.tweet;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 // This is a Repository Interface
@@ -11,4 +16,5 @@ import java.util.List;
 public interface TweetRepository extends CrudRepository<Tweet, Long> {
     //  This is how we specify the Entity it refers to. ^^^^^
     List<Tweet> findById(long id);
+    List<Tweet> findAllByOrderByCreatedAtDesc();
 }
