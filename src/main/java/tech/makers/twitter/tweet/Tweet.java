@@ -5,6 +5,7 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 
 // This is a Spring Entity.
+//Entities should have no logic, only storage data
 // It represents a Model in MVC.
 // And each instance, when saved, will refer to a row in the 'tweet' table in the database.
 @Entity
@@ -20,11 +21,10 @@ public class Tweet {
 
     public Tweet(String body) {
         this.body = body;
-        this.createdAt = LocalDateTime.now(Clock.systemUTC());
     }
-    public Tweet(String body, Clock clock){
+    public Tweet(String body, LocalDateTime createdAt){
         this.body = body;
-        this.createdAt = LocalDateTime.now(clock);
+        this.createdAt = createdAt;
     }
 
     @Override

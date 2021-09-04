@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AppUserController {
 
     @Autowired
-    private AppUserRepository appUserRepository;
+    private AppUserService appUserService;
 
     @GetMapping("/sign-up")
     public String signUp(Model model){
 
-        model.addAttribute("newUser",new AppUser());
-        model.addAttribute("users",appUserRepository.findAll());
+        model.addAttribute("newUser", new AppUser());
 
         return "signUp";
     }
 
     @PostMapping("/users")
-    public String create(@ModelAttribute AppUser appUser){
+    public String create(@ModelAttribute AppUserForm appUserForm){
 
-        appUserRepository.save(appUser);
+        AppUser newAppUser = appUserService.create(appUserForm);
+        appUserService.save(newAppUser);
         return "redirect:/";
     }
 

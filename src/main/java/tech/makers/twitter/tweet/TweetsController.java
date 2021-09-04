@@ -1,15 +1,15 @@
 package tech.makers.twitter.tweet;
 
+//Controllers should have no logic, and they should not interact
+//directly with the repository. they should interact with the
+//service
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 @Controller
 public class TweetsController {
@@ -17,8 +17,9 @@ public class TweetsController {
     // It tells Spring 'you need to give us an object like this'.
     // So when we call any of our controller methods,
     // it will magically be there for us to use!
+
     @Autowired
-    private TweetRepository tweetRepository;
+    private TweetService tweetService;
 
     // This is another annotation.
     // It tells Spring what route it should watch out for
@@ -28,7 +29,7 @@ public class TweetsController {
         // Model is the 'view model'. We add attributes on it, which then
         // get passed into the views in `src/main/resources/templates/index.html`.
         model.addAttribute("newTweet", new TweetForm());
-        model.addAttribute("tweets", tweetRepository.findAllByOrderByCreatedAtDesc());
+        model.addAttribute("tweets", tweetService.findAll());
 //        Sort.Direction.DESC, "id")
         return "index";
         //     ^^^^^^^ This is how Spring knows what template to use.
@@ -41,7 +42,8 @@ public class TweetsController {
         // This `ModelAttribute` is actually an instance of our entity Tweet.
         // Auto-constructed for us based on the parameters in the POST request.
         // So we just need to save it!
-        tweetRepository.save(new Tweet(tweetForm.getBody()));
+        Tweet newTweet = tweetService.create(tweetForm.getBody());
+        tweetService.save(newTweet);
         return "redirect:/";
         // This is a special string that means 'redirect me to:' and then we give
         // it '/' so it redirects to the root.

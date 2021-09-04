@@ -1,34 +1,16 @@
 package tech.makers.twitter.appuser;
 
-import javax.persistence.*;
-
-@Entity
-public class AppUser {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+public class AppUserForm {
     private String name;
     private String username;
     private String email;
     private String password;
-    private boolean isLoggedIn = false;
 
-    protected AppUser() {}
-
-    public AppUser(String name, String username, String email, String password) {
+    public AppUserForm(String name, String username, String email, String password) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -61,13 +43,5 @@ public class AppUser {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
     }
 }
