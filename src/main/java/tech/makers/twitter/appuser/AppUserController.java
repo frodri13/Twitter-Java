@@ -16,7 +16,7 @@ public class AppUserController {
     @GetMapping("/sign-up")
     public String signUp(Model model){
 
-        model.addAttribute("newUser", new AppUser());
+        model.addAttribute("newUser", new AppUserForm());
 
         return "signUp";
     }
@@ -29,4 +29,18 @@ public class AppUserController {
         return "redirect:/";
     }
 
+    @GetMapping("/login")
+    public String login(Model model){
+        model.addAttribute("userToConfirm", new AppUserForm());
+
+        return "login";
+    }
+
+    @PostMapping("/user-confirmation")
+    public String confirm(@ModelAttribute AppUserForm appUserForm){
+
+        appUserService.login(appUserForm);
+
+        return "redirect:/";
+    }
 }

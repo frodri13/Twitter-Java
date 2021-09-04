@@ -6,12 +6,20 @@ public class AppUserForm {
     private String email;
     private String password;
 
+    protected  AppUserForm() {}
+
+    public AppUserForm(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public AppUserForm(String name, String username, String email, String password) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
     }
+
 
     public String getName() {
         return name;
