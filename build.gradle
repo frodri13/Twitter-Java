@@ -32,6 +32,10 @@ dependencies {
 
 	// And feature test support through Selenium, hooking into something Spring provides called HtmlUnit
 	testImplementation 'org.seleniumhq.selenium:htmlunit-driver'
+
+	//Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-test'
 }
 
 test {
