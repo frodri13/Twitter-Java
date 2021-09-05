@@ -2,15 +2,14 @@ package tech.makers.twitter.appuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class AppUserService {
+public class AppUserService{
+    private final static String USER_NOT_FOUND_MSG =
+            "User with username %s not found";
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -27,23 +26,27 @@ public class AppUserService {
     }
 
     public void save(AppUser appUser){
-        appUser.setLoggedIn(true);
         appUserRepository.save(appUser);
     }
 
-    public Optional<AppUser> loadUserByUsename(String username){
+    public AppUser loadUserByUsername(String username){
         return appUserRepository.findByUsername(username);
     }
 
     public void login(AppUserForm appUserForm){
         String username = appUserForm.getUsername();
         String password = appUserForm.getPassword();
+        AppUser dbUser = loadUserByUsername(username);
 
-        if (loadUserByUsename(username).isPresent()) {
-            System.out.println("found");
+        if (dbUser == null) {
+            throw new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, username));
         } else {
-            System.out.println("not found");
+            if (passwordEncoder.matches(password, dbUser.getPassword())) {
+                dbUser.setLoggedIn(true);
+                appUserRepository.save(dbUser);
+            } else {
+                System.out.println("Incorrect password");
+            }
         }
-
     }
 }
