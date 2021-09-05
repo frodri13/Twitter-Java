@@ -20,6 +20,11 @@ public class Comment {
         this.body = body;
     }
 
+    public Comment(String body, LocalDateTime createdAt) {
+        this.body = body;
+        this.createdAt = createdAt;
+    }
+
     public Comment(String body, LocalDateTime createdAt, Long appUserId, Long tweetId) {
         this.body = body;
         this.createdAt = createdAt;
