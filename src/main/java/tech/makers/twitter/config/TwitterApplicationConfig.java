@@ -1,4 +1,4 @@
-package tech.makers.twitter;
+package tech.makers.twitter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
