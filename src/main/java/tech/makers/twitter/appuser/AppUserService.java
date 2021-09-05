@@ -1,15 +1,19 @@
 package tech.makers.twitter.appuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AppUserService{
     private final static String USER_NOT_FOUND_MSG =
             "User with username %s not found";
+
+    private final static String UNABLE_TO_LOGOUT_MSG =
+            "Unable to logout since you are not currently logged in";
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -47,6 +51,17 @@ public class AppUserService{
             } else {
                 System.out.println("Incorrect password");
             }
+        }
+    }
+//
+    public void logout() {
+        List<AppUser> appUsers = appUserRepository.findAll();
+
+        for(AppUser appUser: appUsers){
+           if (appUser.isLoggedIn()) {
+               appUser.setLoggedIn(false);
+               appUserRepository.save(appUser);
+           }
         }
     }
 }

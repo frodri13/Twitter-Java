@@ -43,4 +43,19 @@ public class AppUserController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/logout")
+    public String logout(Model model){
+        model.addAttribute("User", new AppUserForm());
+
+        return "nav";
+    }
+
+    @PostMapping("/logout")
+    public String logout(){
+
+        appUserService.logout();
+
+        return "redirect:/";
+    }
 }
