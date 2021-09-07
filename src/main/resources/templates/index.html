@@ -29,6 +29,7 @@
             <span th:text="${tweet.body}"></span>
             <span th:text="${#temporals.format(tweet.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
             <!--  ^^^^^^^  ^^^^^^^^^^^^^ And this pulls the body of the tweet out, and puts it into element -->
+            <div th:replace="comments :: comment-section">
         </li>
     </ul>
 </body>

@@ -5,10 +5,10 @@
     <title>Comments</title>
 </head>
 <body>
-    <div>
-        <form action="#" th:action="@{/comments}" th:object="newComment" method="post">
+    <div th:fragment="comment-section">
+        <form action="#" th:action="@{/comments}" th:object="${newComment}" method="post">
             <input type="text" if="comment-form-body" th:field="*{body}" >
-            <input type="submit" if="comment-form-submit" value="Post" >
+            <input type="submit" if="comment-form-submit" value="Comment" >
         </form>
 
         <ul>

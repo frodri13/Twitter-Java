@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import tech.makers.twitter.comment.CommentController;
+import tech.makers.twitter.comment.CommentForm;
+import tech.makers.twitter.comment.CommentService;
 
 @Controller
 public class TweetsController {
@@ -21,6 +24,9 @@ public class TweetsController {
     @Autowired
     private TweetService tweetService;
 
+    @Autowired
+    private CommentService commentService;
+
     // This is another annotation.
     // It tells Spring what route it should watch out for
     // and call this method when someone loads that route.
@@ -30,6 +36,9 @@ public class TweetsController {
         // get passed into the views in `src/main/resources/templates/index.html`.
         model.addAttribute("newTweet", new TweetForm());
         model.addAttribute("tweets", tweetService.findAll());
+        model.addAttribute("newComment", new CommentForm());
+        model.addAttribute("comments", commentService.findAll());
+
 //        Sort.Direction.DESC, "id")
         return "index";
         //     ^^^^^^^ This is how Spring knows what template to use.

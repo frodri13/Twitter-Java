@@ -3,7 +3,7 @@ package tech.makers.twitter.comment;
 public class CommentForm {
     private String body;
 
-    protected CommentForm() {}
+    public CommentForm() {}
 
     CommentForm(String body){
         this.body = body;
