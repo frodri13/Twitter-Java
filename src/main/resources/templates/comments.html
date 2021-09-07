@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+</head>
+<body>
+    <div>
+        <form action="#" th:action="@{/comments}" th:object="newComment" method="post">
+            <input type="text" if="comment-form-body" th:field="*{body}" >
+            <input type="submit" if="comment-form-submit" value="Post" >
+        </form>
+
+        <ul>
+            <li th:each="comment: ${comments}" >
+                <span th:text="${comment.body}"></span>
+                <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

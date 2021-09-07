@@ -1,7 +1,6 @@
 package tech.makers.twitter.tweet;
 
 import javax.persistence.*;
-import java.time.Clock;
 import java.time.LocalDateTime;
 
 // This is a Spring Entity.
