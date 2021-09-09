@@ -7,14 +7,12 @@ package tech.makers.twitter.tweet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import tech.makers.twitter.comment.CommentController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import tech.makers.twitter.comment.CommentForm;
 import tech.makers.twitter.comment.CommentService;
 
-@Controller
+@RestController
 public class TweetsController {
     // @Autowired is an annotation.
     // It tells Spring 'you need to give us an object like this'.
@@ -23,9 +21,6 @@ public class TweetsController {
 
     @Autowired
     private TweetService tweetService;
-
-    @Autowired
-    private CommentService commentService;
 
     // This is another annotation.
     // It tells Spring what route it should watch out for
@@ -37,8 +32,6 @@ public class TweetsController {
         model.addAttribute("newTweet", new TweetForm());
         model.addAttribute("tweets", tweetService.findAll());
         model.addAttribute("newComment", new CommentForm());
-        model.addAttribute("comments", commentService.findAll());
-
 //        Sort.Direction.DESC, "id")
         return "index";
         //     ^^^^^^^ This is how Spring knows what template to use.
@@ -56,5 +49,12 @@ public class TweetsController {
         return "redirect:/";
         // This is a special string that means 'redirect me to:' and then we give
         // it '/' so it redirects to the root.
+    }
+    
+    @PutMapping("/tweets/{tweetid}")
+    public String updateTweet(@PathVariable Long tweetId, @Validated @RequestBody Tweet tweetReqest) {
+        return tweetService.findById(tweetId).map(post -> {
+            tweet.set
+        })
     }
 }

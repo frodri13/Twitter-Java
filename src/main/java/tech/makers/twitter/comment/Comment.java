@@ -1,9 +1,8 @@
 package tech.makers.twitter.comment;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import tech.makers.twitter.tweet.Tweet;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +13,10 @@ public class Comment {
     private String body;
     private LocalDateTime createdAt;
     private Long appUserId;
-    private Long tweetId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tweet")
+    private Tweet tweet;
 
     protected Comment() {}
 
@@ -27,11 +29,11 @@ public class Comment {
         this.createdAt = createdAt;
     }
 
-    public Comment(String body, LocalDateTime createdAt, Long appUserId, Long tweetId) {
+    public Comment(String body, LocalDateTime createdAt, Long appUserId, Tweet tweet) {
         this.body = body;
         this.createdAt = createdAt;
         this.appUserId = appUserId;
-        this.tweetId = tweetId;
+        this.tweet = tweet;
     }
 
     public Long getId() {
@@ -50,7 +52,11 @@ public class Comment {
         return appUserId;
     }
 
-    public Long getTweetId() {
-        return tweetId;
+    public Tweet getTweet() {
+        return tweet;
+    }
+
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
     }
 }

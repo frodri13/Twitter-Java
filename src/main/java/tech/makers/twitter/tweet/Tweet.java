@@ -1,7 +1,10 @@
 package tech.makers.twitter.tweet;
 
+import tech.makers.twitter.comment.Comment;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 // This is a Spring Entity.
 //Entities should have no logic, only storage data
@@ -15,6 +18,9 @@ public class Tweet {
     private Long id;
     private String body;
     private LocalDateTime createdAt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tweet")
+    private List<Comment> comments;
 
     protected Tweet() {}
 
@@ -40,5 +46,13 @@ public class Tweet {
     }
 
     public LocalDateTime getCreatedAt() { return LocalDateTime.now();
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
